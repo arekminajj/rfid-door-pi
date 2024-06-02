@@ -4,6 +4,8 @@ import time
 import os
 import RPi.GPIO as GPIO
 from RPLCD.gpio import CharLCD
+import buzzer
+import relay
 
 API_KEY = os.environ['API_KEY']
 BASE_URL = "https://rfid-door-api-db3514e2b4df.herokuapp.com/"
@@ -43,6 +45,9 @@ while(True):
 	username = user['name']
 	print("logged in as " + username)
 	lcd.write_string(username)
+	relay.high()
+	buzzer.beep()
+	relay.low()
 	logEntrance(int(id))
 	time.sleep(3)
 	lcd.clear()
